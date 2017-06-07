@@ -22,7 +22,10 @@
 对于原有SDK轻度用户来说, 通过以下步骤就能得到一个可工作的BIMFACE应用程序。
 1. 复制[BimfaceSDKSample_Application](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_Application.html)中的示例。
 2. 将示例源代码替换你原有的代码。
-3. 修改viewToken。
+3. 修改代码中的viewToken。
+
+升级完成后的界面如下。其中包括工具条, 构件树和属性面板等新功能。
+![Bimface Web Application](./image/BimfaceWebApplication.png)
 
 ### 高级用户升级
 对于深度使用原有SDK，并且定制了自己产品的用户, 
