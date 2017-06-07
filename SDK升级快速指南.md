@@ -30,7 +30,10 @@
 2. 修改BimfaceSDKLoaderConfig， 引用Debug版本的SDK, 方便调试。 <br>
 `bimfaceLoaderConfig.configuration = BimfaceConfigrationOption.Debug;`
 3. 在浏览器调试台中的源代码面板可找到BimfaceSDK的Debug代码。
-4. 由于老版本SDK只提供viewer功能， 所以用户需要参考以下列表来修改代码。<br>
+4. 由于老版本SDK只提供viewer功能， 所以用户需要参考新老功能函数对照表来修改代码。
+
+#### 新老功能函数对照表
+
 |Function|1.0 Style|2.0 Style|Comment|
 |:--|:--|:--|:--|
 |Rendering|Viewer.render()|Viewer.render()||
@@ -75,7 +78,6 @@
 |Make components opaque|Viewer.action.untranslucent()|Viewer.setComponentsOpacity([ids], OpacityOption.Opaque)||
 |Get family list|Viewer.getFamilyList()|Viewer.getFamilyTypes()|For RfaView only.|
 |Show family type|Viewer.showType()|Viewer.showFamilyTypeById(id)|For RfaView only|
-
 
 
 
