@@ -1,0 +1,106 @@
+<!DOCTYPE html>
+<html lang="en">
+<head>
+  <meta charset="UTF-8">
+  <meta name="viewport" content="width=device-width, initial-scale=1.0">
+  <meta http-equiv="X-UA-Compatible" content="ie=edge">
+  <title>BIMFACE SDK Sample - Properties</title>
+  <style media="screen">
+    html,
+    body{
+      margin: 0;
+      padding: 0;
+      width: 100%;
+      height: 100%;
+    }
+    #view{
+      width: 100%;
+      height: 100%;
+      position: relative;
+    }
+	
+	h1 {
+		float: left;
+	}
+  </style>
+  <!--reference the BIMFACE Javascript SDK loader-->
+  <script src="https://static.bimface.com/api/BimfaceSDKLoader/BimfaceSDKLoader@latest-release.js" charset="utf-8"></script>
+</head>
+<body>
+  <div id="view"></div>
+  <script type="text/javascript">
+    // Prepare your 3D view token
+    var viewToken = 'your3DViewToken';
+	
+	// Create the config object of SDK loader. The SDK loader helps load correct version of BIMFACE SDK with given view token.	
+    var bimfaceLoaderConfig = new BimfaceSDKLoaderConfig();
+    bimfaceLoaderConfig.viewToken = viewToken;
+	// Load the SDK modules. Based on the default config, it'll load the latest uglified (release) version of modules of viewerlication, Viewer, Data and UI.
+	// And each module represents a JS file which will be loaded. For example, module UI means Glodon/Bimface@latest-release/UI.js will be added into this html.
+    BimfaceSDKLoader.load(bimfaceLoaderConfig, onSDKLoadSucceeded, onSDKLoadFailed);
+
+	// Callback of succeeded SDK loading
+    function onSDKLoadSucceeded(){
+	
+	  var authConfig = new Glodon.Bimface.Authentication.AuthenticationConfig();
+	  authConfig.viewToken = viewToken;
+	  
+	  var authManager = new Glodon.Bimface.Authentication.AuthenticationManager(authConfig);
+	  authManager.authenticate(onAuthenticateSucceeded, onAuthenticateFailed);
+
+    };
+	// Callback of succeeded authentication
+	function onAuthenticateSucceeded(data) {		
+		
+		// Prepare your dom element to be the host of the BIMFACE viewerlication
+		var view = document.getElementById('view')
+		
+		// Create the meta data manager to retrieve the properties of components.
+		var dataManagerConfig = new Glodon.Bimface.Data.MateDataManagerConfig();
+		dataManagerConfig.viewToken = data.viewToken;
+		dataManagerConfig.modelId = data.modelId;		
+		var dataManager = new Glodon.Bimface.Data.MateDataManager(dataManagerConfig);
+
+		// Create the config of viewer
+		var viewer3DConfig = new Glodon.Bimface.Viewer.Viewer3DConfig();	  
+		viewer3DConfig.domElement = view;
+
+		// Got the events enum of viewer
+		var viewerEvents = Glodon.Bimface.Viewer.ViewerEvent;
+		// Create web viewer
+		var viewer = new Glodon.Bimface.Viewer.Viewer3D(viewer3DConfig);
+		// Add your view with its token. Note that you can add multiple views.
+		viewer.addView(viewToken);
+		
+		// Event handler of adding view
+		viewer.addEventListener(viewerEvents.ViewAdded,function(){
+			// Render all contents.
+			viewer.render();
+		});
+		// Event handler of reporting progress
+		viewer.addEventListener(viewerEvents.ViewLoading,function(progress){
+			console.log(progress);
+		});
+		// Event handler of error handling
+		viewer.addEventListener(viewerEvents.Error,function(data){
+			console.log(data);
+		});
+		// Event handler of components selection
+		viewer.addEventListener(viewerEvents.ComponentsSelectionChanged,function(selectionData){
+			dataManager.getComponentProperty(selectionData.objectId, function(propertyData) {				
+				alert(JSON.stringify(propertyData));
+			});
+		});
+	}	
+
+	function onAuthenticateFailed(error) {
+	
+	}
+	
+    function onSDKLoadFailed(error){
+
+    };
+
+  </script>
+</body>
+</html>
