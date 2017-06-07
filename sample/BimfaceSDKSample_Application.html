@@ -1,5 +1,6 @@
 <!DOCTYPE html>
 <html lang="en">
+
 <head>
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
@@ -7,13 +8,14 @@
   <title>BIMFACE SDK Sample - Application</title>
   <style media="screen">
     html,
-    body{
+    body {
       margin: 0;
       padding: 0;
       width: 100%;
       height: 100%;
     }
-    #view{
+    
+    #view {
       width: 100%;
       height: 100%;
       position: relative;
@@ -22,58 +24,59 @@
   <!--reference the BIMFACE Javascript SDK loader-->
   <script src="https://static.bimface.com/api/BimfaceSDKLoader/BimfaceSDKLoader@latest-release.js" charset="utf-8"></script>
 </head>
+
 <body>
   <div id="view"></div>
   <script type="text/javascript">
     // Prepare your 3D view token
     var viewToken = 'your3DViewToken';
-	
-	// Create the config object of SDK loader. The SDK loader helps load correct version of BIMFACE SDK with given view token.	
+
+    // Create the config object of SDK loader. The SDK loader helps load correct version of BIMFACE SDK with given view token.	
     var bimfaceLoaderConfig = new BimfaceSDKLoaderConfig();
     bimfaceLoaderConfig.viewToken = viewToken;
-	// Load the SDK modules. Based on the default config, it'll load the latest uglified (release) version of modules of Application, Viewer, Data and UI.
-	// And each module represents a JS file which will be loaded. For example, module UI means Glodon/Bimface@latest-release/UI.js will be added into this html.
+    // Load the SDK modules. Based on the default config, it'll load the latest uglified (release) version of modules of Application, Viewer, Data and UI.
+    // And each module represents a JS file which will be loaded. For example, module UI means Glodon/Bimface@latest-release/UI.js will be added into this html.
     BimfaceSDKLoader.load(bimfaceLoaderConfig, onSDKLoadSucceeded, onSDKLoadFailed);
 
-	// Callback of succeeded SDK loading
-    function onSDKLoadSucceeded(){
-	  // Prepare your dom element to be the host of the BIMFACE application
+    // Callback of succeeded SDK loading
+    function onSDKLoadSucceeded() {
+      // Prepare your dom element to be the host of the BIMFACE application
       var view = document.getElementById('view')
-	  
-	  // Create the config of WebApplication
-      var webAppConfig = new Glodon.Bimface.Application.WebApplicationConfig();	  
+
+      // Create the config of WebApplication
+      var webAppConfig = new Glodon.Bimface.Application.WebApplicationConfig();
       webAppConfig.domElement = view;
-	  
-	  // Got the events enum of WebApplication
+
+      // Got the events enum of WebApplication
       var appEvents = Glodon.Bimface.Application.WebApplicationEvent;
-	  // Create web application
+      // Create web application
       var app = new Glodon.Bimface.Application.WebApplication(webAppConfig);
       // Add your view with its token. Note that you can add multiple views.
-	  app.addView(viewToken);
-	  
-	  // Event handler of adding view
-      app.addEventListener(appEvents.ViewAdded,function(){
-	    // Render all contents.
+      app.addView(viewToken);
+
+      // Event handler of adding view
+      app.addEventListener(appEvents.ViewAdded, function () {
+        // Render all contents.
         app.render();
       });
-	  // Event handler of reporting progress
-      app.addEventListener(appEvents.ViewLoading,function(progress){
+      // Event handler of reporting progress
+      app.addEventListener(appEvents.ViewLoading, function (progress) {
         console.log(progress);
       });
-	  // Event handler of components selection
-      app.addEventListener(appEvents.ComponentsSelectionChanged,function(data){
+      // Event handler of components selection
+      app.addEventListener(appEvents.ComponentsSelectionChanged, function (data) {
         console.log(data);
       });
-	  // Event handler of error handling
-      app.addEventListener(appEvents.Error,function(data){
+      // Event handler of error handling
+      app.addEventListener(appEvents.Error, function (data) {
         console.log(data);
       });
     };
 
-    function onSDKLoadFailed(error){
+    function onSDKLoadFailed(error) {
 
     };
-
   </script>
 </body>
+
 </html>
