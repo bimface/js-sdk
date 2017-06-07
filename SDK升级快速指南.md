@@ -12,7 +12,7 @@
 - **原生UI** 新SDK将提供常用UI创建功能。 
 - **原生数据获取** 新SDK将提供数据数据查询和获取功能。
 - **原生插件** 新SDK将提供插件功能， 比如
-    - 标注 （在建中）    
+    - 标签 （在建中）    
     - 小地图 （在建中）
     - 批注 (将会提供)
 
@@ -34,7 +34,7 @@
 
 #### 新老功能函数对照表
 
-|Function|1.0 Style|2.0 Style|Comment|
+|Function|Previous Style|New Style|Comment|
 |:--|:--|:--|:--|
 |Rendering|Viewer.render()|Viewer.render()||
 |Enable rotation|Viewer.disableRotation(enable)|Viewer.enableOrbit(isEnabled)|Valid values are true and false. Defaut is true.|

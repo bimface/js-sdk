@@ -55,10 +55,10 @@
 			var view = document.getElementById('view')
 
 			// Create the meta data manager to retrieve the properties of components.
-			var dataManagerConfig = new Glodon.Bimface.Data.MateDataManagerConfig();
+			var dataManagerConfig = new Glodon.Bimface.Data.MetaDataManagerConfig();
 			dataManagerConfig.viewToken = data.viewToken;
 			dataManagerConfig.modelId = data.modelId;
-			var dataManager = new Glodon.Bimface.Data.MateDataManager(dataManagerConfig);
+			var dataManager = new Glodon.Bimface.Data.MetaDataManager(dataManagerConfig);
 
 			// Create the config of viewer
 			var viewer3DConfig = new Glodon.Bimface.Viewer.Viewer3DConfig();
