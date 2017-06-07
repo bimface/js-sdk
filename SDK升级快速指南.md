@@ -3,15 +3,15 @@
 本指南用于指导原BIMFACE Javascript SDK用户进行SDK升级。
 
 ## 基本概念
-- **模块化** BIMFACE新SDK将功能拆分为不同的模块, 方便用户根据不同的应用场景进行调用。
+- **模块化** 新版SDK将功能拆分为不同的模块, 方便用户根据不同的应用场景进行调用。
     - Glodon.Bimface.Viewer           包含模型显示相关功能。如模型渲染, 模型操作。
     - Glodon.Bimface.Data             包含数据属性获取等功能。如构件属性获取。
     - Glodon.Bimface.Authentication   包含验证功能。
     - Glodon.Bimface.UI               包含UI控件。如按钮，工具条。
     - Glodon.Bimface.Application      包含Bimface应用程序。如WebApplication含有UI， 模型浏览等功能。
-- **原生UI** 新SDK将提供常用UI创建功能。 
-- **原生数据获取** 新SDK将提供数据数据查询和获取功能。
-- **原生插件** 新SDK将提供插件功能， 比如
+- **原生UI** 新版SDK将提供常用UI创建功能。 
+- **原生数据获取** 新版SDK将提供数据数据查询和获取功能。
+- **原生插件** 新版SDK将提供插件功能， 比如
     - 标签 （在建中）    
     - 小地图 （在建中）
     - 批注 (将会提供)
@@ -24,12 +24,12 @@
 2. 将示例源代码替换你原有的代码。
 3. 修改代码中的viewToken。
 
-升级完成后的界面如下。其中包括工具条, 构件树和属性面板等新功能。
+升级完成后的界面如下(其中包括工具条, 构件树和属性面板等新功能)。
 ![Bimface Web Application](./image/BimfaceWebApplication.png)
 
 ### 高级用户升级
 对于深度使用原有SDK，并且定制了自己产品的用户, 
-1. 参考[BimfaceSDKSample_Properties](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_Properties.html)可用看到新版SDK对Authentication, Viewer及属性获取的基本应用。
+1. 参考[BimfaceSDKSample_Properties](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_Properties.html)可以看到新版SDK对Authentication, Viewer及属性获取的基本应用。
 2. 修改BimfaceSDKLoaderConfig， 引用Debug版本的SDK, 方便调试。 <br>
 `bimfaceLoaderConfig.configuration = BimfaceConfigrationOption.Debug;`
 3. 在浏览器调试台中的源代码面板可找到BimfaceSDK的Debug代码。
