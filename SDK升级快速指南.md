@@ -16,11 +16,11 @@
     - 小地图 （在建中）
     - 批注 (将会提供)
 
-## 升级指南
+## 升级指南 (3D)
 ### 一般用户升级
 
 对于原有SDK轻度用户来说, 通过以下步骤就能得到一个可工作的BIMFACE应用程序。
-1. 复制[BimfaceSDKSample_Application](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_Application.html)中的示例。
+1. 复制[BimfaceSDKSample_Application](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_WebApplication2D.html)中的示例。
 2. 将示例源代码替换你原有的代码。
 3. 修改代码中的viewToken。
 
@@ -29,7 +29,7 @@
 
 ### 高级用户升级
 对于深度使用原有SDK，并且定制了自己产品的用户, 
-1. 参考[BimfaceSDKSample_Properties](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_Properties.html)可用看到新版SDK对Authentication, Viewer及属性获取的基本应用。
+1. 参考[BimfaceSDKSample_Properties](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_GetProperties2D.html)可用看到新版SDK对Authentication, Viewer及属性获取的基本应用。
 2. 修改BimfaceSDKLoaderConfig， 引用Debug版本的SDK, 方便调试。 <br>
 `bimfaceLoaderConfig.configuration = BimfaceConfigrationOption.Debug;`
 3. 在浏览器调试台中的源代码面板可找到BimfaceSDK的Debug代码。
