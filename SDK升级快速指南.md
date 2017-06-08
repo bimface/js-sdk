@@ -20,19 +20,16 @@
 ### 一般用户升级
 
 对于原有SDK轻度用户来说, 通过以下步骤就能得到一个可工作的BIMFACE应用程序。
-1. 复制[BimfaceSDKSample_Application](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_WebApplication2D.html)中的示例。
+1. 复制[BimfaceSDKSample_WebApplication3D](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_WebApplication3D.html)中的示例。
 2. 将示例源代码替换你原有的代码。
 3. 修改代码中的viewToken。
 
 升级完成后的界面如下(其中包括工具条, 构件树和属性面板等新功能)。
-![Bimface Web Application](./image/BimfaceWebApplication.png)
+![Bimface Web Application 3D](./image/BimfaceWebApplication3D.png)
 
 ### 高级用户升级
 对于深度使用原有SDK，并且定制了自己产品的用户, 
-1. 参考[BimfaceSDKSample_Properties](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_GetProperties2D.html)可用看到新版SDK对Authentication, 3D Viewer及属性获取的基本应用。
-
-1. 参考[BimfaceSDKSample_Properties](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_Properties.html)可以看到新版SDK对Authentication, 3D Viewer及属性获取的基本应用。
-
+1. 参考[BimfaceSDKSample_GetProperties3D](https://github.com/bimface/js-sdk/blob/master/sample/BimfaceSDKSample_GetProperties3D.html)可用看到新版SDK对Authentication, 3D Viewer及属性获取的基本应用。
 2. 修改BimfaceSDKLoaderConfig， 引用Debug版本的SDK, 方便调试。 <br>
 `bimfaceLoaderConfig.configuration = BimfaceConfigrationOption.Debug;`
 3. 在浏览器调试台中的源代码面板可找到BimfaceSDK的Debug代码。
