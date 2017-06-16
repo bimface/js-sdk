@@ -21,7 +21,7 @@
 			position: relative;
 		}
 	</style>
-	<!--reference the BIMFACE Javascript SDK loader-->
+	<!--reference the BIMFACE JavaScript SDK loader-->
 	<script src="https://static.bimface.com/api/BimfaceSDKLoader/BimfaceSDKLoader@latest-release.js" charset="utf-8"></script>
 </head>
 
@@ -29,7 +29,7 @@
 	<div id="view"></div>
 	<script type="text/javascript">
 		// Prepare your 3D view token
-		var viewToken = 'your3DViewToken';
+		var viewToken = 'ef3c15bc3489466291dd6d94888b94e4';
 
 		// Create the config object of SDK loader. The SDK loader helps load correct version of BIMFACE SDK with given view token.	
 		var bimfaceLoaderConfig = new BimfaceSDKLoaderConfig();
@@ -39,7 +39,12 @@
 		BimfaceSDKLoader.load(bimfaceLoaderConfig, onSDKLoadSucceeded, onSDKLoadFailed);
 
 		// Callback of succeeded SDK loading
-		function onSDKLoadSucceeded() {
+		function onSDKLoadSucceeded(viewMetaData) {
+
+			// We need a 3D view.
+			if (viewMetaData.viewType != "3DView") {
+				return;
+			}
 
 			var authConfig = new Glodon.Bimface.Authentication.AuthenticationConfig();
 			authConfig.viewToken = viewToken;
@@ -58,15 +63,18 @@
 			var dataManagerConfig = new Glodon.Bimface.Data.MetaDataManagerConfig();
 			dataManagerConfig.viewToken = data.viewToken;
 			dataManagerConfig.modelId = data.modelId;
+			dataManagerConfig.modelType = data.modelType;
+			
 			var dataManager = new Glodon.Bimface.Data.MetaDataManager(dataManagerConfig);
 
 			// Create the config of viewer
-			var viewer3DConfig = new Glodon.Bimface.Viewer.Viewer3DConfig();
+			var viewer3DConfig = Glodon.Bimface.Viewer.Viewer3DConfig();
 			viewer3DConfig.domElement = view;
 
 			// Got the events enum of viewer
-			var viewerEvents = Glodon.Bimface.Viewer.ViewerEvent;
-			// Create web viewer
+			var viewerEvents = Glodon.Bimface.Viewer.Viewer3DEvent;
+			// Create web viewer to fetch the component ID. And the MetaDataManager 
+			// doesn't depend on the viewer.
 			var viewer = new Glodon.Bimface.Viewer.Viewer3D(viewer3DConfig);
 			// Add your view with its token. Note that you can add multiple views.
 			viewer.addView(viewToken);
@@ -76,14 +84,7 @@
 				// Render all contents.
 				viewer.render();
 			});
-			// Event handler of reporting progress
-			viewer.addEventListener(viewerEvents.ViewLoading, function (progress) {
-				console.log(progress);
-			});
-			// Event handler of error handling
-			viewer.addEventListener(viewerEvents.Error, function (data) {
-				console.log(data);
-			});
+
 			// Event handler of components selection
 			viewer.addEventListener(viewerEvents.ComponentsSelectionChanged, function (selectionData) {
 				dataManager.getComponentProperty(selectionData.objectId, function (propertyData) {

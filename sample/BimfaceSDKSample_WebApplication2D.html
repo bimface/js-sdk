@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>BIMFACE SDK Sample - Web Application (3D)</title>
+  <title>BIMFACE SDK Sample - Web Application (2D)</title>
   <style media="screen">
     html,
     body {
@@ -28,8 +28,8 @@
 <body>
   <div id="view"></div>
   <script type="text/javascript">
-    // Prepare your 3D view token
-    var viewToken = 'your3DViewToken';
+    // Prepare your Dwg view token
+    var viewToken = 'yourDwgViewToken';
 
     // Create the config object of SDK loader. The SDK loader helps load correct version of BIMFACE SDK with given view token.	
     var bimfaceLoaderConfig = new BimfaceSDKLoaderConfig();
@@ -42,40 +42,22 @@
     function onSDKLoadSucceeded(viewMetaData) {
 
       // We need a 3D view.
-      if (viewMetaData.viewType != "3DView") {
+      if (viewMetaData.viewType != "dwgView") {
         return;
       }
       // Prepare your dom element to be the host of the BIMFACE application
       var view = document.getElementById('view')
 
       // Create the config of the application
-      var webAppConfig = new Glodon.Bimface.Application.WebApplication3DConfig();
+      var webAppConfig = new Glodon.Bimface.Application.WebApplication2DConfig();
       webAppConfig.domElement = view;
 
       // Got the events enum of the application
-      var appEvents = Glodon.Bimface.Application.WebApplication3DEvent;
+      var appEvents = Glodon.Bimface.Application.WebApplication2DEvent;
       // Create the application
-      var app = new Glodon.Bimface.Application.WebApplication3D(webAppConfig);
-      // Add your view with its token. Note that you can add multiple views.
-      app.addView(viewToken);
-
-      // Event handler of adding view
-      app.addEventListener(appEvents.ViewAdded, function () {
-        // Render all contents.
-        app.render();
-      });
-      // Event handler of reporting progress
-      app.addEventListener(appEvents.ViewLoading, function (progress) {
-        console.log(progress);
-      });
-      // Event handler of components selection
-      app.addEventListener(appEvents.ComponentsSelectionChanged, function (data) {
-        console.log(data);
-      });
-      // Event handler of error handling
-      app.addEventListener(appEvents.Error, function (data) {
-        console.log(data);
-      });
+      var app = new Glodon.Bimface.Application.WebApplication2D(webAppConfig);
+      // Load your view with its token.
+      app.load(viewToken);
     };
 
     function onSDKLoadFailed(error) {

@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>BIMFACE SDK Sample - Web Application (3D)</title>
+  <title>BIMFACE SDK Sample - Web Application (Demo)</title>
   <style media="screen">
     html,
     body {
@@ -21,15 +21,15 @@
       position: relative;
     }
   </style>
-  <!--reference the BIMFACE JavasSript SDK loader-->
+  <!--reference the BIMFACE JavaScript SDK loader-->
   <script src="https://static.bimface.com/api/BimfaceSDKLoader/BimfaceSDKLoader@latest-release.js" charset="utf-8"></script>
 </head>
 
 <body>
   <div id="view"></div>
   <script type="text/javascript">
-    // Prepare your 3D view token
-    var viewToken = 'your3DViewToken';
+    // Prepare your view token, it could be any view type.
+    var viewToken = 'anyOfYourViewToken';
 
     // Create the config object of SDK loader. The SDK loader helps load correct version of BIMFACE SDK with given view token.	
     var bimfaceLoaderConfig = new BimfaceSDKLoaderConfig();
@@ -40,43 +40,15 @@
 
     // Callback of succeeded SDK loading
     function onSDKLoadSucceeded(viewMetaData) {
-
-      // We need a 3D view.
-      if (viewMetaData.viewType != "3DView") {
-        return;
-      }
       // Prepare your dom element to be the host of the BIMFACE application
       var view = document.getElementById('view')
 
-      // Create the config of the application
-      var webAppConfig = new Glodon.Bimface.Application.WebApplication3DConfig();
-      webAppConfig.domElement = view;
-
-      // Got the events enum of the application
-      var appEvents = Glodon.Bimface.Application.WebApplication3DEvent;
       // Create the application
-      var app = new Glodon.Bimface.Application.WebApplication3D(webAppConfig);
-      // Add your view with its token. Note that you can add multiple views.
-      app.addView(viewToken);
-
-      // Event handler of adding view
-      app.addEventListener(appEvents.ViewAdded, function () {
-        // Render all contents.
-        app.render();
-      });
-      // Event handler of reporting progress
-      app.addEventListener(appEvents.ViewLoading, function (progress) {
-        console.log(progress);
-      });
-      // Event handler of components selection
-      app.addEventListener(appEvents.ComponentsSelectionChanged, function (data) {
-        console.log(data);
-      });
-      // Event handler of error handling
-      app.addEventListener(appEvents.Error, function (data) {
-        console.log(data);
-      });
-    };
+      var demoConfig = new Glodon.Bimface.Application.WebApplicationDemo(viewMetaData, view);
+       
+      // Hide BIMFACE information, such as the About button in the toolbar
+      // demoConfig.hideBimfaceInfo();
+    }
 
     function onSDKLoadFailed(error) {
 

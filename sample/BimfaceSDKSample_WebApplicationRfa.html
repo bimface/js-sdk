@@ -5,7 +5,7 @@
   <meta charset="UTF-8">
   <meta name="viewport" content="width=device-width, initial-scale=1.0">
   <meta http-equiv="X-UA-Compatible" content="ie=edge">
-  <title>BIMFACE SDK Sample - Web Application (3D)</title>
+  <title>BIMFACE SDK Sample - Web Application (Rfa)</title>
   <style media="screen">
     html,
     body {
@@ -28,12 +28,13 @@
 <body>
   <div id="view"></div>
   <script type="text/javascript">
-    // Prepare your 3D view token
-    var viewToken = 'your3DViewToken';
+    // Prepare your Rfa view token
+    var viewToken = 'yourRfaViewToken';
 
     // Create the config object of SDK loader. The SDK loader helps load correct version of BIMFACE SDK with given view token.	
     var bimfaceLoaderConfig = new BimfaceSDKLoaderConfig();
     bimfaceLoaderConfig.viewToken = viewToken;
+    bimfaceLoaderConfig.configuration = BimfaceConfigrationOption.Debug;
     // Load the SDK modules. Based on the default config, it'll load the latest uglified (release) version of modules of Application, Viewer, Data and UI.
     // And each module represents a JS file which will be loaded. For example, module UI means Glodon/Bimface@latest-release/UI.js will be added into this html.
     BimfaceSDKLoader.load(bimfaceLoaderConfig, onSDKLoadSucceeded, onSDKLoadFailed);
@@ -41,21 +42,21 @@
     // Callback of succeeded SDK loading
     function onSDKLoadSucceeded(viewMetaData) {
 
-      // We need a 3D view.
-      if (viewMetaData.viewType != "3DView") {
+      // We need a Rfa view.
+      if (viewMetaData.viewType != "rfaView") {
         return;
       }
       // Prepare your dom element to be the host of the BIMFACE application
       var view = document.getElementById('view')
 
-      // Create the config of the application
-      var webAppConfig = new Glodon.Bimface.Application.WebApplication3DConfig();
+      // Create the config the application
+      var webAppConfig = new Glodon.Bimface.Application.WebApplicationRfaConfig();
       webAppConfig.domElement = view;
 
       // Got the events enum of the application
-      var appEvents = Glodon.Bimface.Application.WebApplication3DEvent;
+      var appEvents = Glodon.Bimface.Application.WebApplicationRfaEvent;
       // Create the application
-      var app = new Glodon.Bimface.Application.WebApplication3D(webAppConfig);
+      var app = new Glodon.Bimface.Application.WebApplicationRfa(webAppConfig);
       // Add your view with its token. Note that you can add multiple views.
       app.addView(viewToken);
 
